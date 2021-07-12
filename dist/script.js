@@ -86,14 +86,58 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/lib/core.js":
+/*!****************************!*\
+  !*** ./src/js/lib/core.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(() => {
+  // короткий вызов querySelectorAll по символу $
+  const $ = function (selector) {
+    const elements = document.querySelectorAll(selector);
+    const obj = {}; // скрывает элементы
+
+    obj.hide = () => {
+      elements.forEach(elem => {
+        elem.style.display = 'none';
+      }); // чейнинг вызовов
+
+      return obj;
+    }; // показывает элементы (на усмотрение браузера, т.к. могут быть инлайновые элементы и т.д.)
+
+
+    obj.show = () => {
+      elements.forEach(elem => {
+        elem.style.display = '';
+      }); // чейнинг вызовов
+
+      return obj;
+    }; // чейнинг вызовов
+
+
+    return obj;
+  };
+
+  window.$ = $;
+})();
+
+/***/ }),
+
 /***/ "./src/js/main.js":
 /*!************************!*\
   !*** ./src/js/main.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-console.log('Hello!');
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core */ "./src/js/lib/core.js");
+/* harmony import */ var _lib_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_lib_core__WEBPACK_IMPORTED_MODULE_0__);
+
+$('.active').hide().show();
 
 /***/ })
 
