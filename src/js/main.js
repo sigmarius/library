@@ -1,3 +1,3 @@
 import './lib/lib';
 
-$('.active').toggle();
+$('.active').removeClass('active');

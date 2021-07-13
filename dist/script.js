@@ -130,7 +130,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./src/js/lib/core.js");
 /* harmony import */ var _modules_display__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/display */ "./src/js/lib/modules/display.js");
 /* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/classes */ "./src/js/lib/modules/classes.js");
-/* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_classes__WEBPACK_IMPORTED_MODULE_2__);
 // добавляет функциональности созданной в core.js функции $
 
 
@@ -143,10 +142,40 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************!*\
   !*** ./src/js/lib/modules/classes.js ***!
   \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+ // с помощью REST-оператора передаем классы
 
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.addClass = function (...classNames) {
+  for (let i = 0; i < this.length; i++) {
+    // с помощью Spread-оператора разворачиваем аргументы
+    this[i].classList.add(...classNames);
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.removeClass = function (...classNames) {
+  for (let i = 0; i < this.length; i++) {
+    // с помощью Spread-оператора разворачиваем аргументы
+    this[i].classList.remove(...classNames);
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggleClass = function (className) {
+  for (let i = 0; i < this.length; i++) {
+    // toggle применяется только для 1 переданного класса
+    this[i].classList.toggle(className);
+  }
+
+  return this;
+};
 
 /***/ }),
 
@@ -221,7 +250,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggle = function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/lib */ "./src/js/lib/lib.js");
 
-$('.active').toggle();
+$('.active').removeClass('active');
 
 /***/ })
 
