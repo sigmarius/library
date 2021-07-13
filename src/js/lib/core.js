@@ -1,32 +1,24 @@
-(() => {
-    // короткий вызов querySelectorAll по символу $
-    const $ = function (selector) {
-        const elements = document.querySelectorAll(selector);
+const $ = function(selector) {
+    return new $.prototype.init(selector);
+};
 
-        const obj = {};
+$.prototype.init = function(selector) {
+    if (!selector) {
+        return this; // возвращаем пустой объект {}
+    }
 
-        // скрывает элементы
-        obj.hide = () => {
-            elements.forEach(elem => {
-                elem.style.display = 'none';
-            });
-            // чейнинг вызовов
-            return obj;
-        };
+    // добавляем к объекту все, что пришло через querySelectorAll
+    Object.assign(this, document.querySelectorAll(selector));
 
-        // показывает элементы (на усмотрение браузера, т.к. могут быть инлайновые элементы и т.д.)
-        obj.show = () => {
-            elements.forEach(elem => {
-                elem.style.display = '';
-            });
-            // чейнинг вызовов
-            return obj;
-        };
+    // записали в объект новое свойство, отвечающее за количество элементов в этом объекте
+    this.length = document.querySelectorAll(selector).length;
 
-        // чейнинг вызовов
-        return obj;
-    };
+    return this;
+};
 
-    window.$ = $;
+// ! записываем в прототип возвращаемого объекта прототип главной функции
+$.prototype.init.prototype = $.prototype;
 
-})();
+window.$ = $;
+
+export default $;

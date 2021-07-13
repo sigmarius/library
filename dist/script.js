@@ -90,38 +90,123 @@
 /*!****************************!*\
   !*** ./src/js/lib/core.js ***!
   \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = function (selector) {
+  return new $.prototype.init(selector);
+};
+
+$.prototype.init = function (selector) {
+  if (!selector) {
+    return this; // возвращаем пустой объект {}
+  } // добавляем к объекту все, что пришло через querySelectorAll
+
+
+  Object.assign(this, document.querySelectorAll(selector)); // записали в объект новое свойство, отвечающее за количество элементов в этом объекте
+
+  this.length = document.querySelectorAll(selector).length;
+  return this;
+}; // ! записываем в прототип возвращаемого объекта прототип главной функции
+
+
+$.prototype.init.prototype = $.prototype;
+window.$ = $;
+/* harmony default export */ __webpack_exports__["default"] = ($);
+
+/***/ }),
+
+/***/ "./src/js/lib/lib.js":
+/*!***************************!*\
+  !*** ./src/js/lib/lib.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./src/js/lib/core.js");
+/* harmony import */ var _modules_display__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/display */ "./src/js/lib/modules/display.js");
+/* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/classes */ "./src/js/lib/modules/classes.js");
+/* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_classes__WEBPACK_IMPORTED_MODULE_2__);
+// добавляет функциональности созданной в core.js функции $
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_core__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
+/***/ "./src/js/lib/modules/classes.js":
+/*!***************************************!*\
+  !*** ./src/js/lib/modules/classes.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-(() => {
-  // короткий вызов querySelectorAll по символу $
-  const $ = function (selector) {
-    const elements = document.querySelectorAll(selector);
-    const obj = {}; // скрывает элементы
-
-    obj.hide = () => {
-      elements.forEach(elem => {
-        elem.style.display = 'none';
-      }); // чейнинг вызовов
-
-      return obj;
-    }; // показывает элементы (на усмотрение браузера, т.к. могут быть инлайновые элементы и т.д.)
 
 
-    obj.show = () => {
-      elements.forEach(elem => {
-        elem.style.display = '';
-      }); // чейнинг вызовов
+/***/ }),
 
-      return obj;
-    }; // чейнинг вызовов
+/***/ "./src/js/lib/modules/display.js":
+/*!***************************************!*\
+  !*** ./src/js/lib/modules/display.js ***!
+  \***************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 
 
-    return obj;
-  };
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.show = function () {
+  for (let i = 0; i < this.length; i++) {
+    // если у элемента не существует свойства style
+    if (!this[i].style) {
+      continue; // пропускаем цикл
+    }
 
-  window.$ = $;
-})();
+    this[i].style.display = '';
+  } // возвращаем объект, чтобы можно было применять чейнинг
+
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.hide = function () {
+  for (let i = 0; i < this.length; i++) {
+    // если у элемента не существует свойства style
+    if (!this[i].style) {
+      continue; // пропускаем цикл
+    }
+
+    this[i].style.display = 'none';
+  } // возвращаем объект, чтобы можно было применять чейнинг
+
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggle = function () {
+  for (let i = 0; i < this.length; i++) {
+    // если у элемента не существует свойства style
+    if (!this[i].style) {
+      continue; // пропускаем цикл
+    }
+
+    if (this[i].style.display === 'none') {
+      this[i].style.display = '';
+    } else {
+      this[i].style.display = 'none';
+    }
+  } // возвращаем объект, чтобы можно было применять чейнинг
+
+
+  return this;
+};
 
 /***/ }),
 
@@ -134,10 +219,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lib_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core */ "./src/js/lib/core.js");
-/* harmony import */ var _lib_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_lib_core__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/lib */ "./src/js/lib/lib.js");
 
-$('.active').hide().show();
+$('.active').toggle();
 
 /***/ })
 
